@@ -20,14 +20,24 @@ public class UsuarioService implements IUsuarioService{
         }
         throw new IllegalArgumentException("Id inválido!");
     }
+
+    public Usuario buscarPorNome(String nome) {
+        Optional<Usuario> usuarioOp = usuarioRepo.findByNome(nome);
+        if(usuarioOp.isPresent()) {
+            return usuarioOp.get();
+        }
+        throw new IllegalArgumentException("Nome inválido!");
+    }
+
     public Usuario novoUsuario(Usuario usuario) {
-    if(usuario == null ||
-    usuario.getNome() == null ||
-    usuario.getSenha() == null) {
-    throw new IllegalArgumentException("Nome e senha inválidos!");
+        if(usuario == null ||
+            usuario.getNome() == null ||
+            usuario.getSenha() == null) {
+            throw new IllegalArgumentException("Nome e senha inválidos!");
+        }
+        return usuarioRepo.save(usuario);
     }
-    return usuarioRepo.save(usuario);
-    }
+
     public List<Usuario> buscarTodos() {
     return usuarioRepo.findAll();
     }

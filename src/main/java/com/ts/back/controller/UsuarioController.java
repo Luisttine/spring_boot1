@@ -28,6 +28,11 @@ public class UsuarioController {
     public Usuario buscarPorId(@PathVariable("usuario") Long id) {
         return service.buscarPorId(id);
     }
+    
+    @GetMapping(value = "/nome/{nome}")
+    public Usuario buscarPorId(@PathVariable("nome") String nome) {
+        return service.buscarPorNome(nome);
+    }
 
     @PostMapping
     public Usuario novoUsuario(@RequestBody Usuario usuario) {
