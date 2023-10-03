@@ -9,33 +9,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ts.back.entity.Usuario;
-import com.ts.back.service.IUsuarioService;
+import com.ts.back.entity.Empregado;
+import com.ts.back.service.IEmpregadoService;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/usuario")
-public class UsuarioController {
+@RequestMapping(value = "/empregado")
+public class EmpregadoController {
     @Autowired
-    private IUsuarioService service;
+    private IEmpregadoService service;
 
     @GetMapping
-    public List<Usuario> buscarTodos() {
+    public List<Empregado> buscarTodos() {
         return service.buscarTodos();
     }
 
-    @GetMapping(value = "/{usuario}")
-    public Usuario buscarPorId(@PathVariable("usuario") Long id) {
-        return service.buscarPorId(id);
+    @GetMapping(value = "/ctps/{empregado}")
+    public Empregado buscarPorCtps(@PathVariable("empregado") Long ctps) {
+        return service.buscarPorCtps(ctps);
     }
     
-    @GetMapping(value = "/nome/{nome}")
-    public Usuario buscarPorId(@PathVariable("nome") String nome) {
-        return service.buscarPorNome(nome);
+    @GetMapping(value = "/email/{email}")
+    public Empregado buscarPorEmail(@PathVariable("email") String email) {
+        return service.buscarPorEmail(email);
     }
 
     @PostMapping
-    public Usuario novoUsuario(@RequestBody Usuario usuario) {
-        return service.novoUsuario(usuario);
+    public Empregado novoEmpregado(@RequestBody Empregado empregado) {
+        return service.novoEmpregado(empregado);
     }
 }
