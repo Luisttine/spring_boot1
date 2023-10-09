@@ -13,23 +13,29 @@ public class EmpregadoService implements IEmpregadoService{
     @Autowired
     private EmpregadoRepository EmpregadoRepo;
 
-    public Empregado buscarPorCtps(Long ctps) {
-        Optional<Empregado> EmpregadoOp = EmpregadoRepo.findByCtps(ctps);
-        if(EmpregadoOp.isPresent()) {
-            return EmpregadoOp.get();
-        }
-        throw new IllegalArgumentException("CTPS inválido!");
-    }
+    // public Empregado buscarPorCtps(Long ctps) {
+    //     Optional<Empregado> EmpregadoOp = EmpregadoRepo.findByCtps(ctps);
+    //     if(EmpregadoOp.isPresent()) {
+    //         return EmpregadoOp.get();
+    //     }
+    //     throw new IllegalArgumentException("CTPS inválido!");
+    // }
 
-    public Empregado buscarPorEmail(String email) {
-        Optional<Empregado> EmpregadoOp = EmpregadoRepo.findByEmail(email);
-        if(EmpregadoOp.isPresent()) {
-            return EmpregadoOp.get();
-        }
-        throw new IllegalArgumentException("Email inválido!");
+    // public Empregado buscarPorEmail(String email) {
+    //     Optional<Empregado> EmpregadoOp = EmpregadoRepo.findByEmail(email);
+    //     if(EmpregadoOp.isPresent()) {
+    //         return EmpregadoOp.get();
+    //     }
+    //     throw new IllegalArgumentException("Email inválido!");
+    // }
+
+    public Empregado buscarPorCtpsOuEmail(Long ctps, String email) {
+        List<Empregado> EmpregadoOp = EmpregadoRepo.findByCtpsOrEmail(ctps, email);
+        return EmpregadoOp.get();
     }
 
     public Empregado novoEmpregado(Empregado Empregado) {
+        // Empregado.setDataCadastro(LocalDateTime().now());
         if(Empregado == null ||
             Empregado.getNome() == null ||
             Empregado.getCtps() == null ||
